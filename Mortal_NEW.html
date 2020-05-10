@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="Vide-0.5.1/src/jquery.vide.js"></script>
+
+
+</head>
+<body  style="width: 1920; height: 743px; background-image: url("bac5.jpg");" data-vide-bg="bac" data-vide-options="loop: true, position: 0% 0%, resizing: false" >
+  <style type="text/css">
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+</style>
+	<div style="position: relative;"  >
+ <canvas id="layer1" width="1910" height="743"   
+   style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+ <canvas id="layer2" width="1910" height="743" 
+   style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+</div>
+
+    <script type="text/javascript">
+    
+   document.addEventListener("keydown",AblPidr);
+   document.addEventListener("keyup",KotPidr);
+
+        var c = document.getElementById("layer1");
+        var ctx = c.getContext("2d");
+         var c2 = document.getElementById("layer2");
+        var ctx2 = c2.getContext("2d");
+        
+var imageObj1 = new Image();
+var golov = new Image();
+var subzero = new Image();
+golov.src = "golov.png";
+var imageObj2 = new Image();
+var ball = new Image(); 
+ball.src = "Persy2/ball/ball.png"; 
+var freeze = new Image(); 
+freeze.src = "Persy2/ball/freeze.png"; 
+
+var hp_sc = new Image();             //
+hp_sc.src = "HP/hp_sc.png";              //
+
+var hp_sub = new Image();             //
+hp_sub.src = "HP/hp_sub.png";              //
+
+
+var hppalka = new Image();             //
+hppalka.src = "HP/hppalka.png";              //
+
+var hppalkasub = new Image();             //
+hppalkasub.src = "HP/hppalkasub.png";              //
+
+
+
+var sx=800;
+var Width=0;
+var i=0;
+var isub =0;
+var x =200,y=320;
+var xs =750,ys=320;
+var hitX =x; 
+var hitY=y; 
+var hitXwidth=225; 
+var hitYheight=400; 
+var xball=xs,yball=ys+100;
+var stoi = [];
+var shag = [];
+var punch =[];
+var punch1 =[];
+var punch2 =[];
+var kick =[];
+var kick1 =[];
+var kick2 =[];
+var kick3 =[];
+var golov1 =[];
+var cepa = [];
+var vstal = [];
+var sel = [];
+var jump = [];
+var jump1 = [];
+var downkick = [];
+var downpunch = [];
+var zik = [];
+var jumpkick = [];
+
+var stoisub = [];
+var shagsub = [];
+var punchsub =[];
+var punch1sub =[];
+var punch2sub =[];
+var kicksub =[];
+var kick1sub =[];
+var kick2sub =[];
+var kick3sub =[];
+var golov1sub =[];
+var vstalsub = [];
+var selsub = [];
+var jumpsub = [];
+var jump1sub = [];
+var downkicksub = [];
+var downpunchsub = [];
+var ziksub = [];
+var skolz = [];
+var jumpkicksub = [];
+
+var zik_t = "Persy/zik/zik";
+var jumpkick_t = "Persy/huyakc/huyakc";
+var cepa_t = "Persy/chain/cepa";
+var stoika_t = "Persy/stoi/Stoi_Scorp";
+var punch_t = "Persy/pnch/udar";
+var punch_t1 = "Persy/pnch/1udar";
+var punch_t2 = "Persy/pnch/2udar";
+var kick_t = "Persy/Kicks/0kicks";
+var kick_t1 = "Persy/Kicks/1Kicks";
+var kick_t2 = "Persy/Kicks/2Kicks";
+var kick_t3 = "Persy/Kicks/3Kicks";
+var shag_t = "Persy/step/shag";
+var golov1_t = "Persy/kidok/Toss";
+var vstal_t = "Persy/crouch/Scorpion_MK2_crouch_";
+var sel_t = "Persy/crouch/Scorpion_MK1_crouch_";
+var jump_t ="Persy/Prijok/Jump";
+var jump_t1 ="Persy/Prijok/1Jump";
+var downkick_t = "Persy/DownKick/CrouchKick";
+var downpunch_t = "Persy/DownPunch/Sweep";
+
+
+var jumpkicksub_t = "Persy2/huyakc/huyakc";
+var skolz_t = "Persy2/skolz/skolz";
+var ziksub_t = "Persy2/zik/zik";
+var stoikasub_t = "Persy2/stoisub/stoi";
+var shagsub_t = "Persy2/stepsub/shag";
+var vstalsub_t = "Persy2/crouch/2sel";
+var selsub_t = "Persy2/crouch/sel";
+var jumpsub_t ="Persy2/Prijok/Jump";
+var jumpsub_t1 ="Persy2/Prijok/1Jump";
+var golov1sub_t = "Persy2/ballanim/iceanim";
+var punchsub_t = "Persy2/pnch/udar";
+var punchsub_t1 = "Persy2/pnch/1udar";
+var punchsub_t2 = "Persy2/pnch/2udar";
+var kicksub_t = "Persy2/Kicks/0kicks";
+var kicksub_t1 = "Persy2/Kicks/1Kicks";
+var kicksub_t2 = "Persy2/Kicks/2Kicks";
+var kicksub_t3 = "Persy2/Kicks/3Kicks";
+var downkicksub_t = "Persy2/DownKick/CrouchKick";
+var downpunchsub_t = "Persy2/DownPunch/Sweep";
+
+
+var hp = 0, hpsub = 0; /////////////
+
+var hui ;
+var uvarotsub = true;
+var glv;
+var glvback;
+var glvback1;
+var glvback2;
+var xgolov =x -60;
+var ygolov =y +81;
+var opa ="0";
+var hopa ="0";
+var nop ="0";
+
+var opasub ="0";
+var hopasub ="0";
+var nopsub ="0";
+
+var enabdownpunch = false;
+var enabdownkick = false;
+var enabdownpunchsub = false;
+var enabdownkicksub = false;
+
+var chain = function(){                  //chain
+	for(var cn = 0; cn <24; cn++){
+ cepa[cn] =  cepa_t+cn+".png";
+}
+}
+chain();
+var stoika = function (){
+ for (var si = 0; si <24 ; si++) {       //stoi
+  stoi[si] = stoika_t+si+".png";
+}
+}
+stoika();
+
+var stoikasub = function (){
+ for (var sisub = 0; sisub <24 ; sisub++) {       //stoisub
+  stoisub[sisub] = stoikasub_t+sisub+".png";
+}
+}
+stoikasub(); 
+
+for (var cepf = 0; cepf <24 ; cepf++) {  //golov1
+  golov1[cepf] = golov1_t +cepf+".png";
+  golov1sub[cepf] = golov1sub_t +cepf+".png";
+}      
+
+for (var sg = 0; sg <24 ; sg++) {        //shag
+  shag[sg] = shag_t+sg+".png";
+  shagsub[sg] = shagsub_t+sg+".png";
+
+  skolz[sg] = skolz_t+sg+".png";
+}
+
+for (var ph = 0; ph <12 ; ph++) {        //punch
+  punch[ph] = punch_t+ph+".png";
+  punch1[ph] = punch_t1+ph+".png";
+  punch2[ph] = punch_t2+ph+".png";
+
+  punchsub[ph] = punchsub_t+ph+".png";
+  punch1sub[ph] = punchsub_t1+ph+".png";
+  punch2sub[ph] = punchsub_t2+ph+".png";
+
+}
+
+for (var ki = 0; ki <13 ; ki++) {        //kick
+  kick[ki] = kick_t+ki+".png";
+  kick1[ki] = kick_t1+ki+".png";
+  kick2[ki] = kick_t2+ki+".png";
+  kick3[ki] = kick_t3+ki+".png";
+
+  kicksub[ki] = kicksub_t+ki+".png";
+  kick1sub[ki] = kicksub_t1+ki+".png";
+  kick2sub[ki] = kicksub_t2+ki+".png";
+  kick3sub[ki] = kicksub_t3+ki+".png";
+}
+
+for (var sl = 0; sl <12 ; sl++) {        //priced
+  sel[sl] = sel_t+sl+".png";
+  selsub[sl] = selsub_t+sl+".png";
+}
+
+for (var vl = 0; vl <12 ; vl++) {        //vstal
+    zik[vl] = zik_t+vl+".png";
+    ziksub[vl] = ziksub_t+vl+".png";
+    vstal[vl] = vstal_t+vl+".png";
+  vstalsub[vl] = vstalsub_t+vl+".png";
+}
+
+for (var dwph = 0; dwph <15 ; dwph++) {        //DownPunch
+  downpunch[dwph] = downpunch_t+dwph+".png";
+  downpunchsub[dwph] = downpunchsub_t+dwph+".png";
+}
+
+for (var dwki = 0; dwki <14 ; dwki++) {        //DownKick
+  downkick[dwki] = downkick_t+dwki+".png";
+  downkicksub[dwki] = downkicksub_t+dwki+".png";
+}
+for (var jp = 0; jp <24 ; jp++) {        //Jump
+  jump[jp] = jump_t+jp+".png";
+  jump1[jp] = jump_t1+jp+".png";
+  jumpsub[jp] = jumpsub_t+jp+".png";
+  jump1sub[jp] = jumpsub_t1+jp+".png";
+}
+
+for (var jpki = 0; jpki <9 ; jpki++) {        //jupmKick
+  jumpkick[jpki] = jumpkick_t+jpki+".png";
+  jumpkicksub[jpki] = jumpkicksub_t+jpki+".png";
+}
+
+var pidaraz=23;
+var enab1 = true;
+var enab2 = false;
+var enabUP = false;
+var enabPunch = true;
+var enabKick = true ;
+var Okd=true;
+var r;
+var r2;
+var ko = false;
+var prg = -24;
+var prijok;
+
+
+var pidarazsub=23;
+var enab1sub = true;
+var enab2sub = false;
+var enabUPsub = false;
+var enabPunchsub = true;
+var enabKicksub = true ;
+var Okdsub=true;
+var rsub;
+var r2sub;
+var kosub = false;
+var prgsub = -24;
+var prijoksub;
+var tenorm=false;
+var dvig;
+var givd;
+var kdskolz=true;
+var pizdik=true;
+var rrr3;
+
+function KotPidr(evtup){                                   //KOT
+switch(evtup.keyCode){
+
+case 97:                    //num 1
+  if (tenorm==true){
+
+
+
+
+
+
+
+  	  tenorm=false;
+    clearTimeout(givd);
+    clearInterval(dvig);
+  isub=0;
+  for (var  nm1up=0; nm1up < 3 ; nm1up++) {
+  stoisub[nm1up] = skolz[nm1up+21];
+} 
+setTimeout(function(){
+ enab1sub=true;
+stoikasub();
+setTimeout(function(){
+  kdskolz=true;
+},500);   
+},150); 
+}
+break;
+  case 40:                        // kinopka viniz
+  if (enabUPsub==true){
+  enabUPsub = false;
+  setTimeout(function(){
+    if (enabdownpunchsub==false && enabdownkicksub==false){
+  isub=0;
+  for (var sups =0; sups <12 ; sups++) {
+    stoisub[sups] = vstalsub[sups];
+  } 
+  enabdownpunchsub = false;
+  enabdownkicksub=false;
+  setTimeout(function(){
+  stoikasub();
+  },400);
+}
+ if (enabdownpunchsub==true){               //DownPunch
+  setTimeout(function(){
+  if(xs<=x+180){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+
+  },250);
+
+
+
+  isub=0;
+  for (var pdns =0; pdns <15 ; pdns++) {
+    stoisub[pdns] = downpunchsub[pdns];
+  }
+  enabdownpunchsub = false; 
+  setTimeout(function(){
+  stoikasub();
+},400);
+}
+if (enabdownkicksub==true){               //DownKick
+    setTimeout(function(){
+  if(xs<=x+165){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+
+  },250);
+
+  isub=0;
+  for (var kdns =0; kdns <14 ; kdns++) {
+    stoisub[kdns] = downkicksub[kdns];
+  }
+  enabdownkicksub = false;
+  setTimeout(function(){
+  stoikasub();
+},400); 
+}
+},300);
+setTimeout(function(){
+enab1sub = true;
+uvarotsub = true;
+},750);
+}
+  break;
+
+case 37:                    //<-- UP
+  if (enab2sub==true){
+    enab1sub = true;
+    clearInterval(r2sub);
+    clearInterval(rsub);
+    enab2sub = false;                                             
+    stoikasub();
+    
+}
+break;
+
+  case 39:                      //--> UP
+  if (enab2sub==true){ 
+    
+    enab1sub = true;
+    clearInterval(rsub);            
+    clearInterval(r2sub); 
+    enab2sub = false;                                            
+   stoikasub();
+   
+ }
+break;
+
+   case 83:                        //S UP
+if (enabUP==true){
+  enabUP = false;
+  setTimeout(function(){
+    if (enabdownpunch==false && enabdownkick==false){
+  i=0;
+  for (var sup =0; sup <12 ; sup++) {
+    stoi[sup] = vstal[sup];
+  } 
+  enabdownpunch = false;
+  enabdownkick=false;
+  setTimeout(function(){
+  stoika();
+  },400);
+}
+ if (enabdownpunch==true){               //DownPunch
+ 	setTimeout(function(){
+if(x+350>xs){
+xs+=30;
+xball=xs;
+enabUPsub=false;
+hpsub=hpsub-3;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var psub =0; psub <6 ; psub++) {
+  stoisub[psub] = ziksub[psub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},250);
+}
+},250);
+  i=0;
+  for (var pdn =0; pdn <15 ; pdn++) {
+    stoi[pdn] = downpunch[pdn];
+  }
+
+  enabdownpunch = false; 
+  setTimeout(function(){
+  stoika();
+},400);
+}
+if (enabdownkick==true){               //DownKick
+	setTimeout(function(){
+if(x+250>xs){
+	xs+=30;
+	xball=xs;
+enabUPsub=false;
+hpsub=hpsub-4;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var psub =0; psub <6 ; psub++) {
+  stoisub[psub] = ziksub[psub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},250);
+}
+},250);
+  i=0;
+  for (var kdn =0; kdn <14 ; kdn++) {
+    stoi[kdn] = downkick[kdn];
+  }
+  enabdownkick = false;9
+  setTimeout(function(){
+  stoika();
+},400); 
+}
+},300);
+setTimeout(function(){
+enab1 = true
+
+},750);
+}
+  break;
+
+  case 65:                    //A UP
+  if (enab2==true){
+  	enab1 = true;
+  	clearInterval(r2);
+  	clearInterval(r);
+    enab2 = false;                                             
+    stoika();
+    
+}
+break;
+
+  case 68:                      //D UP
+  if (enab2==true){ 
+  	enab1 = true;
+    clearInterval(r);            
+    clearInterval(r2); 
+    enab2 = false;                                            
+   stoika();
+   
+ }
+break;
+} 
+ }
+
+var stop; 
+var stop1; 
+var stopball; 
+var stopFreeze; 
+var stopFreeze1; 
+var FrezeCool=false; 
+var ballcode = "";
+var led = false;
+ function AblPidr(evt){                   //ABL
+switch(evt.keyCode){
+
+case 97:                             //NUM 1 
+if(enab1sub==true&& kdskolz==true){
+  setTimeout(function(){
+   if(xs<=x+165){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+},750);
+
+tenorm=true;
+kdskolz=false;
+enab1sub=false;
+clearInterval(dvig);
+isub=0;
+  for (var  nm1=0; nm1 < 24 ; nm1++) {
+  stoisub[nm1] = skolz[nm1];
+}
+dvig = setInterval(function(){
+	if(x>0){
+  xs=xs-20;
+}
+  if(x+100>xs){
+  	x=xs-100;
+  	hp=hp-0.25;
+  }
+},1000/24)
+givd=setTimeout(function(){
+clearInterval(dvig);
+stoikasub();
+tenorm=false;
+enab1sub=true;
+setTimeout(function(){
+ kdskolz=true; 
+},3000);
+},1000);
+}
+break;
+
+  case 98:                          //2 numb Down
+enabdownkicksub = true;
+if(enab1sub==true && enabKicksub == true){
+var totudar = true;
+  hopasub=hopasub+"1";
+ enabdownkicksub = false;
+ enab1sub=false;
+ enabKicksub = false;
+ setTimeout(function(){
+ enabKicksub = true;
+},730);
+  isub=0;
+  
+    if(hopasub=="31") {
+      totudar = false;
+       setTimeout(function(){
+
+  if(xs<=x+165){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+
+  },250);
+    	hui=150;
+    	xs=xs-hui;
+    for (var k2s =0; k2s < 13 ; k2s++) {
+    stoisub[k2s] = kick2sub[k2s];
+}
+}
+    if(hopasub=="41") {
+        totudar = false;
+        setTimeout(function(){
+  if(xs<=x+165){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+
+  },250);
+
+    	hui=150;
+    	xs=xs-hui;
+    for (var k3s =0; k3s < 13 ; k3s++) {
+    stoisub[k3s] = kick3sub[k3s];
+    
+}
+}
+
+  if(hopasub.length==2 &&totudar) {
+
+        setTimeout(function(){
+  if(xs<=x+165){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+
+  },250);
+
+
+      hui=130;
+      xs=xs-hui
+    for (var ks =0; ks < 13 ; ks++) {
+    stoisub[ks] = kicksub[ks];
+}
+}
+    if(hopasub.length==3&&totudar) {
+         setTimeout(function(){
+
+  if(xs<=x+165){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+
+  },250);
+
+      hui=150;
+      xs=xs-hui;
+    for (var k1s =0; k1s < 13 ; k1s++) {
+    stoisub[k1s] = kick1sub[k1s];
+    hopasub="0";
+}
+}
+
+
+setTimeout(function(){
+    	xs=xs+hui;
+  enab1sub = true;
+
+
+     stoikasub();
+},500);
+}
+
+break;
+
+  case 101:                      //5 down
+enabdownpunchsub = true;
+if(enab1sub==true && enabPunchsub == true){
+ 
+  nopsub=nopsub+"2";
+ enabdownpunchsub = false;
+ enab1sub=false;
+ enabPunchsub = false;
+ setTimeout(function(){
+ enabPunchsub = true;
+},700);
+  isub=0;
+  if(nopsub=="02") {
+       setTimeout(function(){
+  if(xs<=x+165){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+
+  },250);
+  hui=140; 
+     nopsub="0";
+     xs=xs-hui;
+for (var ps =0; ps <12 ; ps++) {
+  stoisub[ps] = punchsub[ps];
+ 
+}
+}
+if(nopsub=="22") { 
+     setTimeout(function(){
+  if(xs<=x+165){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+
+  },250);
+	hui=140;
+   nopsub="0";
+   xs=xs-hui;
+for (var p1s =0; p1s <12 ; p1s++) {
+  stoisub[p1s] = punch1sub[p1s];
+}
+}
+if(nopsub=="32") { 
+ setTimeout(function(){
+  if(xs<=x+165){
+    enab1=false;
+    hp-=5;
+    i=0;
+    x-=30;
+
+    for (var i222 = 0; i222 < 12; i222++) {
+      stoi[i222] = zik[i222];
+    }
+    setTimeout(function(){
+      stoika();
+      enab1=true;
+    },250);
+
+  }
+
+  },250);
+	hui=90;
+   nopsub="0";
+   xs=xs-hui;
+for (var p2s =0; p2s <12 ; p2s++) {
+  stoisub[p2s] = punch2sub[p2s];
+}
+}
+setTimeout(function(){
+	xs=xs+hui;
+  enab1sub = true;
+     stoikasub();
+},470);
+}
+break;
+
+case 100: //NUM 4 
+if (enab1sub&&ballcode=="01") { 
+led=true;
+enab1sub = false; 
+isub = 0; 
+for (var ib = 0; ib < 24; ib++) { 
+stoisub[ib] = golov1sub[ib]; 
+} 
+stopball=setInterval(function(){ 
+xball-=40; 
+},1000/48) 
+setTimeout(function(){ 
+clearInterval(stopball); 
+xball=xs; 
+enab1sub = true; 
+stoikasub(); 
+led = false;
+},1000); 
+} 
+
+break;
+
+case 38:                             //  /\ down
+  if (enab1sub==true){
+  enab1sub=false;  
+  prgsub = -30;
+  isub=0;
+if (prgsub<2){
+for (var ws =0; ws <24 ; ws++) {
+  stoisub[ws] = jumpsub[ws];
+}
+}
+setTimeout(function(){
+  if(enabdownkicksub==true){
+  isub=0;
+  for (var wdkis =0; wdkis <9 ; wdkis++) {
+  stoisub[wdkis] = jumpkicksub[wdkis];
+   }
+}
+},400);
+
+setTimeout(function(){
+	  if(enabdownkicksub==false){
+  isub=0;
+}
+  for (var w1s =0; w1s <24 ; w1s++) {
+  stoisub[w1s] = jump1sub[w1s];
+}
+},800)
+setTimeout(function(){
+enabdownkicksub=false;
+stoikasub();
+},1200) 
+prijoksub = setInterval(function(){
+ys = ys + prgsub;
+prgsub = prgsub + 2;
+if (prgsub>30){
+  clearInterval(prijoksub);
+  enab1sub=true;
+}
+},1000/24);
+}
+  break;
+
+case 40:                        //    \/ DOWN    
+if(enab1sub==true){
+enab1sub=false;
+isub=0;
+uvarotsub=false;
+for (var ss =0; ss <13 ; ss++) {
+  stoisub[ss] = selsub[ss];
+}
+enabUPsub=true;
+}
+break;
+
+case 37:                       //<-- down       
+opasub=opasub+"2";
+hopasub="3";
+nopsub="2";
+ballcode = ballcode+"1";
+setTimeout(function(){
+  hopasub="0";
+  nopsub="0";
+  ballcode = "";
+},200); 
+if(enab1sub==true){
+  enab1sub=false;
+  clearInterval(rsub);
+ isub=0; 
+for (var ds =0; ds <24 ; ds++) {
+stoisub[ds] = shagsub[ds];
+}
+r2sub = setInterval(function(){
+	if(x+100<xs){
+  xs-=10;
+  xball=xs;
+}
+},1000/24);
+ enab2sub=true;
+}
+ break;
+
+case 39:                       //--> down
+opasub=opasub+"1";
+hopasub="4";
+nopsub="3";
+ballcode = "0";
+setTimeout(function(){
+
+  hopasub="0";
+  nopsub="0";
+},200);
+if(enab1sub==true){
+  enab1sub=false;
+  clearInterval(r2sub);
+ pidarazsub=23;
+  isub=0; 
+for (var as =0; as <24 ; as++) {
+
+  stoisub[as] = shagsub[as+pidarazsub];
+  if(pidarazsub==-23){
+    pidarazsub=23;}
+  pidarazsub-=2;
+}
+rsub = setInterval(function(){
+	if(xs<1080){
+  xs+=10;
+}
+  xball=xs;
+},1000/24);
+ enab2sub=true;
+ }
+break;
+
+	case 87:                             //W down
+	if (enab1==true){
+	enab1=false;	
+	prg = -30;
+	i=0;
+if (prg<2){
+for (var w =0; w <24 ; w++) {
+  stoi[w] = jump[w];
+}
+}
+setTimeout(function(){
+  if(enabdownkick==true){
+  		setTimeout(function(){
+if(x+250>xs && uvarotsub==true){
+	xs+=30;
+	xball=xs;
+enabUPsub=false;
+hpsub=hpsub-4;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var psub =0; psub <9 ; psub++) {
+  stoisub[psub] = ziksub[psub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},370);
+}
+},250);
+  i=0;
+  for (var wdki =0; wdki <9 ; wdki++) {
+  stoi[wdki] = jumpkick[wdki];
+   }
+}
+},400);
+
+setTimeout(function(){
+  if(enabdownkick==false){
+	i=0;
+}
+	for (var w1 =0; w1 <24 ; w1++) {
+  stoi[w1] = jump1[w1];
+}
+enabdownkick=false;
+},800);
+setTimeout(function(){
+enabdownkick=false;
+stoika();
+},1200);	
+prijok = setInterval(function(){
+y = y + prg;
+prg = prg + 2;
+if (prg>30){
+	clearInterval(prijok);
+	enab1=true;
+}
+},1000/24);
+}
+	break;
+
+  case 79:                                    //O down
+  if(opa=="012" && Okd==true && enab1==true){
+  	opa="0";
+ 	Okd=false;
+  enab1=false;
+  clearTimeout(stop);
+  clearTimeout(stop1);
+  clearTimeout(glvback);
+  clearTimeout(glvback1);
+ko = true;
+sx = 840;
+Width = -40;
+  xgolov=x-60;
+glv=setInterval (function(){
+	xgolov+=40;
+	 if (xgolov>x+334){
+	 	 sx-=40;
+    Width+=40;
+}
+if (xgolov>x+1015){
+	clearInterval(glv);
+glvback = setInterval(function(){
+	 	 sx+=40;
+    Width-=40;
+  xgolov-=40;
+ 
+},1000/48)
+}
+if (xgolov>xs && ys>200 && uvarotsub==true){
+  enab1sub=false;
+  clearInterval(glv);
+  setTimeout(function(){
+    stoikasub();
+  },500);
+  hpsub=hpsub-10;
+  isub=0;
+  for (var zks = 0; zks <12 ; zks++) {        
+    stoisub[zks] = ziksub[zks];
+}
+glvback1 = setInterval(function(){
+     sx+=40;
+    Width-=40;
+  xgolov-=40;
+},1000/48)
+if(x+200<xgolov){
+glvback2 = setInterval(function(){
+ xs=xgolov;
+ if(x+200>xgolov){
+  xs=x+200;
+  clearInterval(glvback2);
+  setTimeout(function(){
+  enab1sub=true;
+},1500);
+} 
+},1000/48);
+}
+}
+},1000/48);
+
+  i=0;
+for (var o = 0; o < 24 ; o++) {
+  stoi[o] = golov1[o];
+}
+ stop = setTimeout(function(){
+stoika();
+enab1 = true;
+},1000);
+ stop1 = setTimeout(function(){
+Okd=true;
+},1300);
+}
+  break;
+
+case 83:                        //S DOWN    
+if(enab1==true){
+enab1=false;
+i=0;
+for (var s =0; s <13 ; s++) {
+  stoi[s] = sel[s];
+}
+enabUP=true;
+}
+
+break;
+
+  case 80:                      //P down
+enabdownpunch = true;
+if(enab1==true && enabPunch == true){
+	nop=nop+"2";
+ enabdownpunch = false;
+ enab1=false;
+ enabPunch = false;
+ setTimeout(function(){
+ enabPunch = true;
+},700);
+  i=0;
+  if(nop=="02") { 
+     nop="0";
+setTimeout(function(){
+if(x+270>xs && uvarotsub==true){
+	xs+=30;
+	xball=xs;
+hpsub=hpsub-4;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var psub =0; psub <6 ; psub++) {
+  stoisub[psub] = ziksub[psub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},250);
+}
+},250);
+for (var p =0; p <12 ; p++) {
+  stoi[p] = punch[p];
+}
+}
+if(nop=="22") { 
+   nop="0";
+  setTimeout(function(){
+if(x+270>xs && uvarotsub==true){
+	xs+=30;
+	xball=xs;
+hpsub=hpsub-6;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var p1sub =0; p1sub <9 ; p1sub++) {
+  stoisub[p1sub] = ziksub[p1sub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},370);
+}
+},250); 
+for (var p1 =0; p1 <12 ; p1++) {
+  stoi[p1] = punch1[p1];
+}
+}
+if(nop=="32") { 
+   nop="0";
+   setTimeout(function(){
+if(x+200>xs && uvarotsub==true){
+	xs+=30;
+	xball=xs;
+hpsub=hpsub-10;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var p2sub =0; p2sub <6 ; p2sub++) {
+  stoisub[p2sub] = ziksub[p2sub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},250);
+}
+},250);
+for (var p2 =0; p2 <12 ; p2++) {
+  stoi[p2] = punch2[p2];
+}
+}
+setTimeout(function(){
+	enab1 = true;
+     stoika();
+},470);
+}
+break;
+
+case 75:                          //K Down
+enabdownkick = true;
+if(enab1==true && enabKick == true){
+	hopa=hopa+"1";
+ enabdownkick = false;
+ enab1=false;
+ enabKick = false;
+ setTimeout(function(){
+ enabKick = true;
+},730);
+  i=0;
+    if(hopa.length==2) {
+    	setTimeout(function(){
+if(x+250>xs ){
+	xs+=30;
+	xball=xs;
+hpsub=hpsub-4;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var psub =0; psub <6 ; psub++) {
+  stoisub[psub] = ziksub[psub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},250);
+}
+},250);
+  	for (var k =0; k < 13 ; k++) {
+    stoi[k] = kick[k];
+}
+}
+    if(hopa.length==3) {
+    	setTimeout(function(){
+if(x+350>xs && uvarotsub==true){
+	xs+=30;
+	xball=xs;
+hpsub=hpsub-5;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var psub =0; psub <6 ; psub++) {
+  stoisub[psub] = ziksub[psub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},250);
+}
+},250);
+  	for (var k1 =0; k1 < 13 ; k1++) {
+    stoi[k1] = kick1[k1];
+    hopa="0";
+}
+}
+    if(hopa=="31") {
+    	setTimeout(function(){
+if(x+310>xs && uvarotsub==true){
+	xs+=30;
+	xball=xs;
+hpsub=hpsub-4;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var psub =0; psub <11 ; psub++) {
+  stoisub[psub] = ziksub[psub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},400);
+}
+},250);
+  	for (var k2 =0; k2 < 13 ; k2++) {
+    stoi[k2] = kick2[k2];
+}
+}
+    if(hopa=="41") {
+    	setTimeout(function(){
+if(x+290>xs){
+	xs+=30;
+	xball=xs;
+hpsub=hpsub-7;
+enab1sub=false;
+isub=0;
+clearInterval(r2sub);
+clearInterval(rsub);
+for (var psub =0; psub <6 ; psub++) {
+  stoisub[psub] = ziksub[psub];
+}
+setTimeout(function(){
+enab1sub=true;
+stoikasub();
+},250);
+}
+},250);
+  	for (var k3 =0; k3 < 13 ; k3++) {
+    stoi[k3] = kick3[k3];
+    
+}
+}
+setTimeout(function(){
+	enab1 = true;
+     stoika();
+},500);
+}
+break;
+
+case 65:                       //A down
+opa=opa+"1";
+hopa="4";
+nop="3";
+setTimeout(function(){
+	hopa="0";
+	nop="0";
+},200);
+if(enab1==true ){
+	enab1=false;
+	clearInterval(r2);
+ pidaraz=23;
+  i=0; 
+for (var a =0; a <24 ; a++) {
+  stoi[a] = shag[a+pidaraz];
+  if(pidaraz==-23){
+    pidaraz=23;}
+  pidaraz-=2;
+}
+r = setInterval(function(){
+	if(x>0){
+  x-=10;
+}
+},1000/24);
+ enab2=true;
+ }
+break;
+
+case 68:                        //D down       
+opa=opa+"2";
+hopa="3";
+nop="2";
+setTimeout(function(){
+	hopa="0";
+	nop="0";
+},200);
+if(enab1==true){
+	enab1=false;
+	clearInterval(r);
+ i=0; 
+for (var d =0; d <24 ; d++) {
+stoi[d] = shag[d];
+}
+r2 = setInterval(function(){
+if(x+100<xs){
+  x+=10;
+}
+},1000/24);
+ enab2=true;
+ 
+ break;
+ }
+  } 
+   }
+   var opat =true;
+    setInterval(function(){
+ imageObj1.src = stoi[i];
+ imageObj2.src = cepa[i];
+  subzero.src = stoisub[isub];
+imageObj1.onload = function () {
+ctx.clearRect(0,0,2000,1000);
+
+ctx.drawImage(hppalka,160,40,333,28);  ///
+ctx.clearRect(490+hp*3.3,40,333,28);
+
+ctx.drawImage(hp_sc,100,20,400,80);  ///
+ctx.drawImage(hppalkasub,710,40,333,28);  ///
+
+ctx.clearRect(710,40,hpsub*3.3*-1,28);
+ctx.drawImage(hp_sub,700,20,400,80);  ///
+
+if (hp<-100) {
+  alert("!!!!SUB-ZERO WINS!!!!");
+  location.reload();
+}
+if (x<=0) {
+x=5;
+}
+
+if (hpsub<-100) {
+  alert("!!!!SCORPION WINS!!!!");
+  location.reload();
+}
+if (x<=0) {
+x=5;
+}
+
+
+
+
+  if (ko ==true) {    
+   if (xgolov>x+334){
+   	ctx.drawImage(imageObj2,sx,0,Width,157,xgolov-Width+10,ygolov-68,Width,157);
+    ctx.drawImage(golov,xgolov,ygolov,72,17);
+  }
+   }
+ctx.drawImage(imageObj1,x,y); 
+if (FrezeCool==false) { 
+if(i==23){ 
+i=-1; 
+} 
+i++; 
+} 
+} 
+
+if(opa.length>3){
+	opa="0";
+}
+if(opa.length==3){
+setTimeout(function(){
+	opa="0";
+},600);
+}
+
+var stoppp;  
+subzero.onload = function(){ 
+if (opat) { 
+hitX=x,hitY=y; 
+} 
+ctx2.clearRect(0,0,2000,1000); 
+ctx2.drawImage(subzero,xs,ys); 
+if (FrezeCool) { 
+//__UP все кнопки 
+enab1 = true; 
+clearInterval(r2); 
+clearInterval(r); 
+enab2 = false; 
+//___ 
+ctx2.drawImage(freeze,hitX+10,hitY,hitXwidth,hitYheight); 
+enab1=false; 
+} 
+if (xball<xs&&led==true) { 
+ctx2.drawImage(ball,xball,yball,200,100); 
+} 
+if(isub==23){ 
+isub=-1; 
+} 
+isub++; 
+} 
+if (xball>=x+10&&xball<=x+200&&yball<y+300&&xball<xs&&led==true) { 
+clearInterval(stoppp); 
+FrezeCool=true; 
+stoppp=setTimeout(function(){ 
+for (var si = 0; si <24 ; si++) {                               //stoi 
+stoi[si] = stoika_t+si+".png"; 
+} 
+clearInterval(r2); 
+clearInterval(r); 
+opat=true; 
+enab1=true; 
+FrezeCool=false; 
+hitXwidth=225; 
+hitYheight=400; 
+
+},1500); 
+FrezeCool1 = setTimeout(function(){ 
+clearInterval(stopFreeze); 
+},1500); 
+}
+
+
+},1000/24);
+
+    </script>
+
+</body>
+</html>
